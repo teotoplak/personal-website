@@ -1,6 +1,9 @@
 <html>
   <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
     <title> Teo Toplak | personal website</title>
   </head>
   <body>
@@ -15,14 +18,45 @@
         </h4>
       </div>
       <div class="col d-flex flex-column align-items-center justify-content-end">
-        <h3 class="ml-auto">Software</h3>
+        <h3 class="ml-auto">Cloud Computing</h3>
         <h3 class="ml-auto">Blockchain</h3>
-        <h3 class="ml-auto">Meditation</h3>
+        <h3 class="ml-auto">Productivity</h3>
+        <h3 class="ml-auto">Mindfulness</h3>
         <h3 class="ml-auto">Travel</h3>
-        <h3 class="ml-auto">Fitness</h3>
         <h3 class="ml-auto text-muted">enthusiast</h3>
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="col">
+      <h1 class="text-center">
+        <span>You are what you </span>
+        <span style="text-decoration: line-through;">eat</span> read
+      </h1>
+    </div>
+  </div>
   </body>
+<script>
+
+  let goodreadsEndpoint = "https://www.goodreads.com/review/list/26975906.xml?key=RvbIOcUGmindrbTmiPbdg&v=2";
+  // cors workaround
+  // goodreadsEndpoint = "https://cors-anywhere.herokuapp.com/" + goodreadsEndpoint;
+
+  function httpGetAsync(theUrl, callback)
+  {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    };
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
+
+  function callbackFunction(content) {
+    console.log(content)
+  }
+
+  httpGetAsync(goodreadsEndpoint, callbackFunction)
+</script>
 </html>
