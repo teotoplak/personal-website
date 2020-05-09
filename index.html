@@ -28,19 +28,24 @@
     </div>
   </div>
   <div class="container">
-    <div class="col">
-      <h1 class="text-center">
-        <span>You are what you </span>
-        <span style="text-decoration: line-through;">eat</span> read
-      </h1>
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center">
+          <span>You are what you </span>
+          <span style="text-decoration: line-through;">eat</span> read
+        </h1>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap" id="pics">
+
     </div>
   </div>
   </body>
 <script>
 
-  let goodreadsEndpoint = "https://www.goodreads.com/review/list/26975906.xml?key=RvbIOcUGmindrbTmiPbdg&v=2";
+  let goodreadsEndpoint = "https://www.goodreads.com/review/list/26975906.xml?key=RvbIOcUGmindrbTmiPbdg&v=2&shelf=read";
   // cors workaround
-  // goodreadsEndpoint = "https://cors-anywhere.herokuapp.com/" + goodreadsEndpoint;
+  goodreadsEndpoint = "https://cors-anywhere.herokuapp.com/" + goodreadsEndpoint;
 
   function httpGetAsync(theUrl, callback)
   {
@@ -54,7 +59,17 @@
   }
 
   function callbackFunction(content) {
-    console.log(content)
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(content,"text/xml");
+    const imageUrls = xmlDoc.getElementsByTagName("image_url");
+    for (i = 0; i < imageUrls.length; i++) {
+      imgSource = imageUrls[i].childNodes[0].nodeValue;
+      imgSource = imgSource.replace("(\\.+_+[A-Za-z0-9]+_+)", "");
+      console.log(imgSource);
+      document.getElementById("pics").innerHTML =  document.getElementById("pics").innerHTML +
+              `<div><img src='${imgSource}' width="125px" height="200px"</div>`
+    }
+
   }
 
   httpGetAsync(goodreadsEndpoint, callbackFunction)
