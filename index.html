@@ -27,36 +27,5 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="col">
-      <h1 class="text-center">
-        <span>You are what you </span>
-        <span style="text-decoration: line-through;">eat</span> read
-      </h1>
-    </div>
-  </div>
   </body>
-<script>
-
-  let goodreadsEndpoint = "https://www.goodreads.com/review/list/26975906.xml?key=RvbIOcUGmindrbTmiPbdg&v=2";
-  // cors workaround
-  // goodreadsEndpoint = "https://cors-anywhere.herokuapp.com/" + goodreadsEndpoint;
-
-  function httpGetAsync(theUrl, callback)
-  {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-        callback(xmlHttp.responseText);
-    };
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
-  }
-
-  function callbackFunction(content) {
-    console.log(content)
-  }
-
-  httpGetAsync(goodreadsEndpoint, callbackFunction)
-</script>
 </html>
